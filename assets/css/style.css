@@ -167,6 +167,11 @@ a {
     line-height: 2;
 }
 
+#about_us_article p {
+    font-size: 1.5rem;
+    color: #999;
+}
+
 #about_us .circle {
     position: absolute;
     width: 1500px;

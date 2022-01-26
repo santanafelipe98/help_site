@@ -12,7 +12,6 @@ let shouldPlayAboutUsAnimation = false;
 const                  aboutUs = document.getElementById('about_us');
 const              aboutUsRect = aboutUs.getBoundingClientRect();
 const       aboutUsDistanceTop = aboutUsRect.top + document.body.scrollTop;
-const       aboutUsDistanceHeight = aboutUsDistanceTop + aboutUsRect.height;
 
 const thumbnails = document.getElementsByClassName('thumbnail');
 const thumbnailsList = Array(thumbnails.length)
@@ -77,6 +76,21 @@ function typeText(element, string, callback) {
     }, duration);
 }
 
+function changeImage() {
+    let screenWidth = document.body.clientWidth;
+
+    if (screenWidth <= 959.98) {
+        const image = document.getElementById('about_us_image03');
+        image.src = './assets/images/about_us_04.jpg';
+    } else {
+        const image = document.getElementById('about_us_image03');
+        image.src = './assets/images/about_us_03.jpg';
+    }
+}
+
+
+changeImage();
+
 playFadeInAnimationSequence(
     [
         pageTitle,
@@ -93,13 +107,14 @@ playFadeInAnimationSequence(
 
 document.addEventListener('scroll', () => {
     let { pageYOffset } = window;
+    console.log(pageYOffset);
 
     let headerAlpha = Math.min(1, ((pageYOffset - MIN_SCROLL_DISTANCE) - MAX_SCROLL_DISTANCE) / (1 - 0) / MAX_SCROLL_DISTANCE);
     headerAlpha     = Math.max(0, headerAlpha);
 
     headerBar.style.background = `rgba(0, 186, 205, ${ headerAlpha })`;
 
-    if (pageYOffset >= aboutUsDistanceTop && pageYOffset <= aboutUsDistanceHeight) {
+    if (pageYOffset >= aboutUsDistanceTop) {
         if (!shouldPlayAboutUsAnimation) {
             shouldPlayAboutUsAnimation = true;
 
@@ -108,4 +123,8 @@ document.addEventListener('scroll', () => {
             )
         }
     }
+});
+
+window.addEventListener('resize', () => {
+    changeImage();
 });
