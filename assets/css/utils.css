@@ -194,6 +194,10 @@
     display: none !important;
 }
 
+.bg-lightblue {
+    background: var(--brand-color);
+}
+
 .c-white {
     color: #fff;
 }
